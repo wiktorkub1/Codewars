@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+
+int digital_root(int n)
+{
+    std::string string = std::to_string(n);
+    int num_lenght = string.size();
+    if (num_lenght == 1) {
+        return std::stoi(string);
+    }
+    else if (num_lenght == 2 && n < 10) {
+        return (string.at(0) - '0') + (string.at(1) - '0');
+    }
+    else {
+        int sum = 0;
+        for (auto a : string) {
+            sum += (a - '0');
+        }
+        return digital_root(sum);
+    }
+}
+
+int main() {
+
+    std::cout << digital_root(493193);
+
+}
