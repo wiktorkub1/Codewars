@@ -5,10 +5,7 @@ bool narcissistic(int value) {
     std::string number = std::to_string(value);
     int count{ 0 }, sum{ 0 }, compare{ 1 };
     for (auto p : number) {
-        count++;
-    }
-    for (auto p : number) {
-        for (int i{ 0 }; i < count; i++) {
+        for (int i{ 0 }; i < number.size(); i++) {
             compare *= p - '0';
         }
         sum += compare;
