@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <cinttypes>
+#include <algorithm>
+
+std::string uint64_to_string(uint64_t value) {
+    std::ostringstream os;
+    os << value;
+    return os.str();
+}
+
+uint64_t descendingOrder(uint64_t a)
+{
+    std::string value = uint64_to_string(a);
+    std::sort(value.begin(), value.end(), std::greater<>());
+
+    uint64_t answer = std::stoull(value);
+    return answer;
+}
+
+int main()
+{
+    std::cout<<descendingOrder(13156143251);
+    return 0;
+}
