@@ -2,11 +2,11 @@
 #include <vector>
 #include <map>
 
-std::map<int, char> hex{
-    {0, '0'}, {1, '1'}, {2, '2'}, {3, '3'},
-    {4, '4'}, {5, '5'}, {6, '6'}, {7, '7'},
-    {8, '8'}, {9, '9'}, {10, 'A'}, {11, 'B'},
-    {12, 'C'}, {13, 'D'}, {14, 'E'}, {15, 'F'},
+std::map<int, std::string> hex{
+    {0, "0"}, {1, "1"}, {2, "2"}, {3, "3"},
+    {4, "4"}, {5, "5"}, {6, "6"}, {7, "7"},
+    {8, "8"}, {9, "9"}, {10, "A"}, {11, "B"},
+    {12, "C"}, {13, "D"}, {14, "E"}, {15, "F"},
 };
 
 class RGBToHex
@@ -29,19 +29,12 @@ std::string RGBToHex::rgb(int r, int g, int b) {
     r /= 16;
     g /= 16;
     b /= 16;
-    std::string result;
-    result.push_back(hex[r]);
-    result.push_back(hex[r_rem]);
-    result.push_back(hex[g]);
-    result.push_back(hex[g_rem]);
-    result.push_back(hex[b]);
-    result.push_back(hex[b_rem]);
     
-    return result;
+    return hex[r] + hex[r_rem] + hex[g] + hex[g_rem] + hex[b] + hex[b_rem];
 }
 
 int main()
 {
-    std::cout << RGBToHex::rgb(1, 2, 3);
+    std::cout << RGBToHex::rgb(-20, 2, 3);
     return 0;
 }
