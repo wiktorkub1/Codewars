@@ -1,0 +1,44 @@
+#include <string>
+#include <vector>
+
+std::string range_extraction(std::vector<int> args) {
+	std::string answer = "";
+	int ctr{ 0 };
+	int temp{ 0 };
+	int last_change{ 0 };
+	int diff{ 0 };
+
+	for (int i = 0; i < args.size() - 1; i++) {
+		temp = args.at(i);
+
+		if (i != args.size() - 1) {
+			diff = args.at(i + 1) - args.at(i);
+		}
+		while (diff == 1 && i != args.size() - 1) {
+			ctr++;
+			if (i == args.size() - 2) { break; }
+			i++;
+			diff = args.at(i + 1) - args.at(i);
+		}
+
+		if (ctr >= 2) {
+			last_change = temp + ctr;
+			answer = answer + std::to_string(temp) + '-' + std::to_string(temp + ctr) + ',';
+			ctr = 0;
+		}
+		else {
+			if (ctr == 1) { i--; }
+			last_change = temp;
+			answer += std::to_string(temp);
+			answer += ',';
+			ctr = 0;
+		}
+	}
+
+	if (last_change != args.at(args.size() - 1)) {
+		answer += std::to_string(args.at(args.size() - 1));
+		answer += ',';
+	}
+	answer.pop_back();
+	return answer;
+}
