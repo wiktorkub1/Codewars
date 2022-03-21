@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+class Node {
+public:
+	Node* next{};
+	void setNext(Node* ptr) {
+		this->next = ptr;
+	}
+	Node* getNext() {
+		return next;
+	}
+	Node() {
+		next = NULL;
+	};
+};
+
+//***SOLUTION***
+
+int getLoopSize(Node* startNode)
+{
+	int size{ 1 }, tail{ 0 };
+	bool end = false;
+
+	std::vector<Node*> visited = { startNode };
+	Node* actual = startNode;
+
+	while (end == false) {
+
+		actual = actual->getNext();
+		visited.push_back(actual);
+		size++;
+
+		if (std::count(visited.begin(), visited.end(), actual) > 1) {
+			end = true;
+			break;
+		}
+	}
+
+	for (int i = 0; i < visited.size(); i++) {
+		if (visited.at(i) != actual) {
+			tail++;
+		}
+		else {
+			break;
+		}
+	}
+
+	return size - tail - 1;
+}
+
+//***SOLUTION***
+
+int main() {
+
+	Node first, second, third, last;
+
+	first.setNext(&second);
+	second.setNext(&third);
+	third.setNext(&last);
+	last.setNext(&second);
+
+	std::cout << getLoopSize(&first);
+
+	return 0;
+}
