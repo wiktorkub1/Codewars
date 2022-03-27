@@ -1,0 +1,20 @@
+#include <iostream>
+
+int beeramid(int bonus, double price)
+{
+	double cost{ 0 }, lvl{ 0 }, num_of_beers{0};
+	do {
+		lvl++;
+		num_of_beers = lvl * lvl;
+		cost += num_of_beers * price;
+	} while (cost < bonus);
+	if(cost != bonus ) lvl--;
+	return lvl;
+}
+
+int main() {
+
+	std::cout << beeramid(1500, 2);
+
+	return 0;
+}
