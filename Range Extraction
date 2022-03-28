@@ -3,40 +3,40 @@
 
 std::string range_extraction(std::vector<int> args) {
 	std::string answer = "";
-	int ctr{ 0 };
+	int range{ 0 };
 	int temp{ 0 };
 	int last_change{ 0 };
 	int diff{ 0 };
 
 	for (int i = 0; i < args.size() - 1; i++) {
-		temp = args.at(i);
+		temp = args[i];
 
 		if (i != args.size() - 1) {
-			diff = args.at(i + 1) - args.at(i);
+			diff = args[i + 1] - args[i];
 		}
 		while (diff == 1 && i != args.size() - 1) {
-			ctr++;
+			range++;
 			if (i == args.size() - 2) { break; }
 			i++;
-			diff = args.at(i + 1) - args.at(i);
+			diff = args[i + 1] - args[i];
 		}
 
-		if (ctr >= 2) {
-			last_change = temp + ctr;
-			answer = answer + std::to_string(temp) + '-' + std::to_string(temp + ctr) + ',';
-			ctr = 0;
+		if (range >= 2) {
+			last_change = temp + range;
+			answer = answer + std::to_string(temp) + '-' + std::to_string(temp + range) + ',';
+			range = 0;
 		}
 		else {
-			if (ctr == 1) { i--; }
+		if (range == 1 && i != args.size() - 2) { i--; }
 			last_change = temp;
 			answer += std::to_string(temp);
 			answer += ',';
-			ctr = 0;
+			range = 0;
 		}
 	}
 
 	if (last_change != args.at(args.size() - 1)) {
-		answer += std::to_string(args.at(args.size() - 1));
+		answer += std::to_string(args[args.size() - 1]);
 		answer += ',';
 	}
 	answer.pop_back();
