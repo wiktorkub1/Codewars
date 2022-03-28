@@ -4,41 +4,40 @@
 std::string range_extraction(std::vector<int> args) {
 	std::string answer = "";
 	int range{ 0 };
-	int temp{ 0 };
-	int last_change{ 0 };
-	int diff{ 0 };
+	int curr_val{ 0 };
+	bool counting = false;
 
-	for (int i = 0; i < args.size() - 1; i++) {
-		temp = args[i];
+	for (int i = 0; i < args.size(); i++) {
+		if (counting == false) { curr_val = args[i]; }
 
-		if (i != args.size() - 1) {
-			diff = args[i + 1] - args[i];
+		if (i == args.size() - 1) { //last one
+			if (range > 1) {
+				answer += std::to_string(curr_val) + '-' + std::to_string(curr_val + range);
+				break;
+			} else if(range == 1) {
+				answer += std::to_string(curr_val) + ',' + std::to_string(args[i]);
+				break;
+			} else {
+				answer += std::to_string(args[i]);
+				break;
+			}
 		}
-		while (diff == 1 && i != args.size() - 1) {
+		if (args[i + 1] - args[i] == 1) {
 			range++;
-			if (i == args.size() - 2) { break; }
-			i++;
-			diff = args[i + 1] - args[i];
+			counting = true;
 		}
-
-		if (range >= 2) {
-			last_change = temp + range;
-			answer = answer + std::to_string(temp) + '-' + std::to_string(temp + range) + ',';
+		else if (range > 1) {
+			answer += std::to_string(curr_val) + '-' + std::to_string(curr_val + range) + ',';
 			range = 0;
+			counting = false;
 		}
-		else {
-		if (range == 1 && i != args.size() - 2) { i--; }
-			last_change = temp;
-			answer += std::to_string(temp);
-			answer += ',';
+		else if (range == 1){
+			answer += std::to_string(curr_val) + ',' + std::to_string(args[i]) + ',';
 			range = 0;
+			counting = false;
+		} else {
+			answer += std::to_string(curr_val) + ',';
 		}
 	}
-
-	if (last_change != args.at(args.size() - 1)) {
-		answer += std::to_string(args[args.size() - 1]);
-		answer += ',';
-	}
-	answer.pop_back();
 	return answer;
 }
