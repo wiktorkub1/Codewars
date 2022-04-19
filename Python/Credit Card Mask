@@ -1,0 +1,12 @@
+# return masked string
+def maskify(cc):
+    if len(cc) < 5:
+        return cc
+    else:
+        masked = ('#' * (len(cc)-4)) + cc[-4:]
+        return masked
+
+if __name__ == '__main__':
+    stringer = '12345'
+    new_stringer = maskify(stringer)
+    print(new_stringer)
