@@ -1,0 +1,38 @@
+class Node:
+    def __init__(self, L, R, n):
+        self.left = L
+        self.right = R
+        self.value = n
+
+
+def tree_by_levels(node):
+
+    if isinstance(node, int):
+        print(node)
+        return None
+
+    if node.left == None:
+        print(node.value)
+        return None
+
+    tree_by_levels(node.left)
+
+    if node.right == None:
+        print(node.value)
+        return None
+
+    tree_by_levels(node.right)
+
+    print(node.value)
+
+    return None
+
+
+if __name__ == '__main__':
+
+    left_node = Node(4, None, 2)
+    right_node = Node(5, 6, 3)
+    up_node = Node(left_node, right_node, 1)
+
+    result = tree_by_levels(up_node)
+    
